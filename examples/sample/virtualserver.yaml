@@ -1,0 +1,37 @@
+apiVersion: mcp.contextforge.entee28.io/v1alpha1
+kind: ContextForgeVirtualServer
+metadata:
+  name: example-virtualserver
+  namespace: contextforge
+spec:
+  providerConfigRef:
+    name: default
+  forProvider:
+    # Visibility: team or public
+    visibility: team
+    # Reference to a ContextForgeTeam in the same namespace
+    teamRef:
+      name: example-team
+    # Optional: Custom server name
+    name: my-virtual-server
+    # Optional: Server description
+    description: "Example virtual MCP server"
+    # Optional: Server icon URL
+    icon: https://example.com/icon.png
+    # Optional: Tags for organizing virtual servers
+    tags:
+      - development
+      - example
+    # Optional: Associated tool IDs (MCP tools exposed via this server)
+    associatedTools:
+      - tool-id-1
+      - tool-id-2
+    # Optional: Associated resource IDs
+    associatedResources:
+      - resource-id-1
+    # Optional: Associated prompt IDs
+    associatedPrompts:
+      - prompt-id-1
+    # Optional: Associated A2A agent IDs
+    associatedA2aAgents:
+      - agent-id-1

@@ -1,0 +1,15 @@
+apiVersion: mcp.contextforge.entee28.io/v1alpha1
+kind: ContextForgeTeam
+metadata:
+  name: example-team
+  namespace: contextforge
+spec:
+  providerConfigRef:
+    name: default
+  forProvider:
+    # Team name (immutable)
+    name: example-team
+    # Optional: Team description
+    description: "Example team for ContextForge resources"
+    # Optional: Maximum number of team members
+    maxMembers: 50

@@ -1,0 +1,35 @@
+apiVersion: mcp.contextforge.entee28.io/v1alpha1
+kind: ContextForgeGateway
+metadata:
+  name: example-gateway
+  namespace: contextforge
+spec:
+  providerConfigRef:
+    name: default
+  forProvider:
+    # Gateway endpoint URL
+    url: https://mcp-server.example.com
+    # Transport protocol: SSE or STREAMABLEHTTP
+    transport: STREAMABLEHTTP
+    # Visibility: team or public
+    visibility: team
+    # Reference to a ContextForgeTeam in the same namespace
+    teamRef:
+      name: example-team
+    # Optional: Custom gateway name (defaults to metadata.name)
+    name: my-mcp-gateway
+    # Optional: Gateway description
+    description: "Example MCP gateway"
+    # Optional: Tags for organizing gateways
+    tags:
+      - production
+      - example
+    # Optional: Authentication for connecting to the upstream MCP server
+    # Choose one of: basic, bearer, headers, queryParam, or oauth
+    auth:
+      type: bearer
+      bearer:
+        # Reference to a Secret containing the bearer token
+        secretRef:
+          name: gateway-auth-secret
+          key: token

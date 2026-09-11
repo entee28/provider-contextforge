@@ -1,0 +1,45 @@
+apiVersion: mcp.contextforge.entee28.io/v1alpha1
+kind: ContextForgeA2AAgent
+metadata:
+  name: example-agent
+  namespace: contextforge
+spec:
+  providerConfigRef:
+    name: default
+  forProvider:
+    # Agent endpoint URL
+    endpointUrl: https://agent.example.com
+    # Visibility: team or public
+    visibility: team
+    # Reference to a ContextForgeTeam in the same namespace
+    teamRef:
+      name: example-team
+    # Optional: Custom agent name
+    name: my-a2a-agent
+    # Optional: Agent description
+    description: "Example A2A agent"
+    # Optional: Tags for organizing agents
+    tags:
+      - research
+      - example
+    # Optional: Agent type (defaults to "generic")
+    agentType: generic
+    # Optional: MCP protocol version (defaults to "1.0")
+    protocolVersion: "1.0"
+    # Optional: Headers to pass through from client to agent
+    passthroughHeaders:
+      - x-custom-header
+      - x-request-id
+    # Optional: Arbitrary agent capabilities (free-form JSON)
+    capabilities: {}
+    # Optional: Arbitrary agent configuration (free-form JSON)
+    config: {}
+    # Optional: Authentication for connecting to the agent
+    # Choose one of: basic, bearer, headers, queryParam, or oauth
+    auth:
+      type: bearer
+      bearer:
+        # Reference to a Secret containing the bearer token
+        secretRef:
+          name: agent-auth-secret
+          key: token

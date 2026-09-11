@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: contextforge
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  namespace: contextforge
+  name: contextforge-credentials
+type: Opaque
+stringData:
+  # Replace with your actual ContextForge API token
+  credentials: your-api-token-here
+---
+# Namespace-scoped ProviderConfig (recommended)
+apiVersion: contextforge.entee28.io/v1alpha1
+kind: ProviderConfig
+metadata:
+  name: default
+  namespace: contextforge
+spec:
+  # ContextForge base URL (e.g., https://contextforge.example.com)
+  baseURL: https://contextforge.example.com
+  credentials:
+    source: Secret
+    secretRef:
+      namespace: contextforge
+      name: contextforge-credentials
+      key: credentials
+---
+# Optionally, define a cluster-scoped ProviderConfig for shared use across namespaces
+apiVersion: contextforge.entee28.io/v1alpha1
+kind: ClusterProviderConfig
+metadata:
+  name: default
+spec:
+  baseURL: https://contextforge.example.com
+  credentials:
+    source: Secret
+    secretRef:
+      namespace: contextforge
+      name: contextforge-credentials
+      key: credentials
