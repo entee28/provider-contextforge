@@ -37,16 +37,18 @@ IMAGES = provider-contextforge
 # ====================================================================================
 # Setup XPKG
 
-XPKG_REG_ORGS ?= docker.io/entee28
-# NOTE(hasheddan): skip promoting on xpkg.upbound.io as channel tags are
-# inferred.
-XPKG_REG_ORGS_NO_PROMOTE ?= docker.io/entee28
+XPKG_REG_ORGS ?= ghcr.io/entee28
+# NOTE(hasheddan): use this to exclude specific registries (e.g.
+# xpkg.upbound.io) from promotion, since some registries infer channel tags
+# rather than supporting them directly. Left empty since ghcr.io supports
+# normal tag promotion.
+XPKG_REG_ORGS_NO_PROMOTE ?=
 XPKGS = provider-contextforge
 -include build/makelib/xpkg.mk
 
 # NOTE(hasheddan): we force image building to happen prior to xpkg build so that
 # we ensure image is present in daemon.
-xpkg.build.provider-template: do.build.images
+xpkg.build.provider-contextforge: do.build.images
 
 fallthrough: submodules
 	@echo Initial setup complete. Running make again . . .
