@@ -11,12 +11,3 @@ metadata:
 spec:
   capabilities:
     - safe-start
-  permissionRequests:
-    - apiGroups:
-        - ""
-      resources:
-        - secrets
-      verbs:
-        - get
-        - list
-        - watch
