@@ -31,10 +31,16 @@ type GatewayParameters struct {
 	URL         string  `json:"url"`
 	Description *string `json:"description,omitempty"`
 	// +kubebuilder:validation:Enum=SSE;STREAMABLEHTTP
-	Transport  string        `json:"transport"`
-	TeamRef    TeamReference `json:"teamRef"`
-	Visibility string        `json:"visibility"`
-	Tags       []string      `json:"tags,omitempty"`
+	Transport string        `json:"transport"`
+	TeamRef   TeamReference `json:"teamRef"`
+	// "private" is deliberately excluded. ContextForge scopes private
+	// visibility to the creating identity's owner_email, but this provider
+	// always authenticates as one shared service account - a private
+	// resource would be invisible to the tenant who created it and their
+	// team, not just restricted.
+	// +kubebuilder:validation:Enum=team;public
+	Visibility string   `json:"visibility"`
+	Tags       []string `json:"tags,omitempty"`
 
 	// +optional
 	Auth *AuthConfig `json:"auth,omitempty"`

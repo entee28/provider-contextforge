@@ -44,6 +44,11 @@ type VirtualServerParameters struct {
 	TeamRef TeamReference `json:"teamRef"`
 
 	// +kubebuilder:validation:Required
+	// "private" is deliberately excluded. ContextForge scopes private
+	// visibility to the creating identity's owner_email, but this provider
+	// always authenticates as one shared service account - a private
+	// resource would be invisible to the tenant who created it and their
+	// team, not just restricted.
 	// +kubebuilder:validation:Enum=team;public
 	Visibility string `json:"visibility"`
 

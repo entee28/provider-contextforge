@@ -102,6 +102,12 @@ spec:
                     - message: teamRef is immutable
                       rule: self == oldSelf
                   visibility:
+                    description: |-
+                      "private" is deliberately excluded. ContextForge scopes private
+                      visibility to the creating identity's owner_email, but this provider
+                      always authenticates as one shared service account - a private
+                      resource would be invisible to the tenant who created it and their
+                      team, not just restricted.
                     enum:
                     - team
                     - public

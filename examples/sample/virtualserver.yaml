@@ -5,6 +5,7 @@ metadata:
   namespace: contextforge
 spec:
   providerConfigRef:
+    kind: ProviderConfig
     name: default
   forProvider:
     # Visibility: team or public
